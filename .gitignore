@@ -33,3 +33,5 @@ workbench.xmi
 
 # Mac OS X junk
 .DS_Store
+bower_components/
+build/
