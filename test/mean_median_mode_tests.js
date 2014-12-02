@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var mmm = require('../lib/mean_median_mode');
 
@@ -10,6 +12,7 @@ describe('Mean', function() {
 describe('Median', function() {
   it('gets an accurate median', function() {
     expect(mmm.Median([4,5,6])).to.eql(5);
+
   });
 });
 
