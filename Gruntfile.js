@@ -70,7 +70,6 @@ module.exports = function(grunt) {
       }
     }
   });
-
   grunt.registerTask('build', ['jshint', 'clean', 'browserify:dev', 'copy:dev']);
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
   grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
