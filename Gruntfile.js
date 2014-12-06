@@ -25,26 +25,7 @@ module.exports = function(grunt) {
     },
 
     simplemocha: {
-      src: ['test/**/*.js']
-    },
-
-    test: {
-      src: ['test/client/**/*.js'],
-      dest: 'test/angular_testbundle.js',
-      options: {
-        transform: ['debowerify']
-      }
-    },
-
-    karma: {
-      unit: {
-        configFile: 'karma.config.js'
-      },
-      continuous: {
-        configFile: 'karma.config.js',
-        singleRun: true,
-        browsers: ['PhantomJS']
-      }
+      src: ['test/mean_median_mode_tests.js']
     },
 
     clean: {
@@ -67,8 +48,28 @@ module.exports = function(grunt) {
         options: {
           transform: ['debowerify']
         }
+      },
+
+      test: {
+        src: ['test/client/**/*.js'],
+        dest: 'test/angular_testbundle.js',
+        options: {
+          transform: ['debowerify']
+        }
       }
-    }
+    },
+
+      karma: {
+        unit: {
+          configFile: 'karma.config.js'
+        },
+
+        continuous: {
+          configFile: 'karma.config.js',
+          singleRun: false,
+          browsers: ['PhantomJS']
+        }
+      }
   });
   grunt.registerTask('build', ['jshint', 'clean', 'browserify:dev', 'copy:dev']);
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);

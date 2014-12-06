@@ -30,18 +30,18 @@ describe('mmmCtlr', function() {
       $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('make a call to index', function() {
-      $httpBackend.expectGET('/').respond(200, [{'num': '4 6 7 8'}]);
+    it('test simple numbers', function() {
+      $httpBackend.expectPOST('/').respond(200, {'Mean': 2.75, 'Median': 2.5, 'Mode': 2});
+      $controllerConstructor('mmmCtrl', {$scope: $scope});
+      $scope.mmm = {};
+      $scope.mmm.num = '2 3 2 4';
+      $scope.calc();
+      $httpBackend.flush();
 
-      $controllerConstructor('notesCtrl', {$scope: $scope});
-      $scope.index();
-debugger;
-      $httpbackend.flush();
-
-      expect($scope.mmm).toBeDefined();
-      expect(Array.isArray($scope.mmm)).toBeTruthy();
-      expect(typeof $scope.mmm[0]).toBe('object');
-      expect($scope.mmm[0].mmmBody).toBe('1 3 74 9');
+      expect($scope.mmm.num).toBe('2 3 2 4');
+      expect($scope.mmm.mean).toBe(2.75);
+      expect($scope.mmm.median).toBe(2.5);
+      expect($scope.mmm.mode).toBe(2);
     });
 });
 });
