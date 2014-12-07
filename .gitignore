@@ -35,3 +35,4 @@ workbench.xmi
 .DS_Store
 bower_components/
 build/
+test/angular_testbundle.js
