@@ -25,38 +25,77 @@ mmmApp.config(['$routeProvider', function($routeProvider) {
 "use strict";
 
 module.exports = function(app) {
-  app.controller("mmmCtrl", ["$scope", "$http", 'mmmBackend', function($scope, $http, mmmBackend) {
+  app.controller("mmmCtrl", ["$scope", 'mmmBackend', function($scope, mmmBackend) {
     $scope.calc = function() {
       var nums = $scope.mmm.num.split(" ").sort(function(a, b) {return a - b;}).map(Number);
-      mmmBackend.calc(nums, $scope);
+      $scope.mmm.mean = mmmBackend().mean(nums);
+      $scope.mmm.median = mmmBackend().median(nums);
+      $scope.mmm.mode = mmmBackend().mode(nums);
     };
-  }]);
+}]);
 };
 
 },{}],3:[function(require,module,exports){
 "use strict";
 module.exports = function(app) {
-  var handleErrors = function(data) {
-    console.log(data);
-  };
+  //var handleErrors = function(data) {
+    //console.log(data);
+  //};
 
-  app.factory('mmmBackend', ['$http', function($http) {
-    return {
-      calc: function(nums, $scope) {
-        $http({
-          method: "POST",
-          url: "/",
-          data:nums
-        })
-        .success(function(data) {
-          $scope.mmm.mean = data.Mean;
-          $scope.mmm.median = data.Median;
-          $scope.mmm.mode = data.Mode;
-        })
-        .error(handleErrors);
-      }
-    };
-  }]);
+  app.factory('mmmBackend', function() {
+    return function() {
+      return {
+        mean : function(list) {
+          var tot = 0;
+          list.forEach(function(data) {
+            tot += data;
+          });
+          return tot / list.length;
+        },
+
+        median : function(list) {
+          var medianer = 0;
+          var index = 0;
+          var newlist = list.sort(function(a, b) {
+            return a - b;
+          });
+          index = newlist.length / 2;
+          var round = Math.round(index);
+          if (index % 2 !== 0) {
+            medianer = newlist[round - 1
+            ];
+            return medianer;
+          }else {
+            medianer = (newlist[index] + newlist[index - 1
+              ]) / 2;
+              return medianer;
+            }
+          },
+
+          mode : function(list) {
+            var bucket = {};
+            var max = 0;
+            var count = 0;
+            list.forEach(function(num) {
+              if (bucket[num
+                ]) { bucket[num
+                  ]++; }
+                  else { bucket[num
+                    ] = 1; }
+                    if (count < bucket[num
+                      ]) {
+                        max = num;
+                        count = bucket[num
+                        ];
+                      }
+                    });
+                    return max;
+                  }
+
+                };
+              };
+
+});
 };
 
 },{}],4:[function(require,module,exports){
@@ -29365,7 +29404,6 @@ require("./../../bower_components/angular-mocks/angular-mocks.js");
 
 describe('mmmCtlr', function() {
   var $controllerConstructor;
-  var $httpBackend;
   var $scope;
 
   beforeEach(angular.mock.module('mmmApp'));
@@ -29380,30 +29418,19 @@ describe('mmmCtlr', function() {
     expect(typeof mmmController).toBe('object');
   });
 
-  describe('rest request', function() {
-    beforeEach(angular.mock.inject(function(_$httpBackend_) {
-      $httpBackend = _$httpBackend_;
-    }));
-
-    afterEach(function() {
-      $httpBackend.verifyNoOutstandingExpectation();
-      $httpBackend.verifyNoOutstandingRequest();
-    });
 
     it('test simple numbers', function() {
-      $httpBackend.expectPOST('/').respond(200, {'Mean': 2.75, 'Median': 2.5, 'Mode': 2});
       $controllerConstructor('mmmCtrl', {$scope: $scope});
       $scope.mmm = {};
       $scope.mmm.num = '2 3 2 4';
       $scope.calc();
-      $httpBackend.flush();
+
 
       expect($scope.mmm.num).toBe('2 3 2 4');
       expect($scope.mmm.mean).toBe(2.75);
       expect($scope.mmm.median).toBe(2.5);
       expect($scope.mmm.mode).toBe(2);
     });
-});
 });
 
 },{"../../app/js/client":1,"./../../bower_components/angular-mocks/angular-mocks.js":4}]},{},[7]);
