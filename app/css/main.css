@@ -1,0 +1,23 @@
+body {
+  background-color: #dddad6; }
+
+h1 {
+  text-align: center;
+  color: #f9f1b5;
+  padding: 25px;
+  font-family: comic;
+  text-shadow: 1px 1px #001F3F;
+  font-size: 250%; }
+
+#box {
+  background: #ae9c96;
+  color: #a6d8de;
+  margin: 0px 200px 0px 200px;
+  padding: 25px;
+  border-radius: 10px;
+  font-size: 150%; }
+
+section {
+  margin: 15px;
+  border: 1px solid #ae9c96;
+  background-color: #a6d8de; }
