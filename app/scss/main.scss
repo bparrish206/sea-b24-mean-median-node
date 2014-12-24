@@ -1,0 +1,38 @@
+$primaryColor: #dddad6;
+$yeller: #f9f1b5;
+$bluish: #a6d8de;
+$drk: #ae9c96;
+$wht: #ffffff;
+
+
+@mixin border-radius($radius){
+  border-radius: $radius;
+}
+
+body {
+  background-color: $primaryColor;
+}
+
+h1 {
+  text-align: center;
+  color: $yeller;
+  padding: 25px;
+  font-family:comic;
+  text-shadow: 1px 1px #001F3F;
+  font-size:250%;
+}
+
+#box {
+  background: $drk;
+  color: $bluish;
+  margin: 0px 200px 0px 200px;
+  padding: 25px;
+  @include border-radius(10px);
+  font-size: 150%;
+}
+
+section {
+  margin: 15px;
+  border: 1px solid $drk;
+  background-color: $bluish;
+}

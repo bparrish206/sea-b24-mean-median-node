@@ -7,8 +7,18 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-sass');
 
   grunt.initConfig({
+    sass:{
+      compile: {
+        files: {
+          'app/css/main.css':'app/scss/main.scss'
+        }
+      }
+    },
+
     jshint: {
       all: ['lib/*.js'],
       options: {
@@ -24,7 +34,7 @@ module.exports = function(grunt) {
     },
 
     simplemocha: {
-      src: ['test/**/*.js']
+      src: ['test/mean_median_mode_tests.js']
     },
 
     clean: {
@@ -35,7 +45,7 @@ module.exports = function(grunt) {
       dev:{
         cwd: 'app/',
         expand: true,
-        src: ['**/*.html'],
+        src: ['**/*.html', 'css/**/*.css'],
         dest: 'build/'
       }
     },
@@ -47,11 +57,31 @@ module.exports = function(grunt) {
         options: {
           transform: ['debowerify']
         }
-      }
-    }
-  });
+      },
 
-  grunt.registerTask('build', ['jshint', 'clean', 'browserify:dev', 'copy:dev']);
+      test: {
+        src: ['test/client/**/*.js'],
+        dest: 'test/angular_testbundle.js',
+        options: {
+          transform: ['debowerify']
+        }
+      }
+    },
+
+      karma: {
+        unit: {
+          configFile: 'karma.config.js'
+        },
+
+        continuous: {
+          configFile: 'karma.config.js',
+          singleRun: false,
+          browsers: ['PhantomJS']
+        }
+      }
+  });
+  grunt.registerTask('build', ['sass', 'jshint', 'clean', 'browserify:dev', 'copy:dev']);
   grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
+  grunt.registerTask('test:client', ['browserify:test', 'karma:unit']);
   grunt.registerTask('default', ['test']);
 };
