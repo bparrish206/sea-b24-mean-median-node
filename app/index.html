@@ -10,13 +10,13 @@
   <div data-ng-app="mmmApp">
     <div data-ng-controller="mmmCtrl" data-ng-init="index()">
       <section>
-      <label>Enter a list of numbers for the MMM(no commas):</label></br>
+      <label>Enter a list of numbers, no commas:</label></br>
       <input type="text" data-ng-model="mmm.num"/>
       <button data-ng-click="calc()">Calculating</button>
     </section>
       </br>
       </br>
-      <div id="box">
+      <div id="box" data-ng-show='view == "show"'>
         <p>Mean: {{mmm.mean}}</p>
         <p>Median: {{mmm.median}}</p>
         <p>Mode: {{mmm.mode}}</p>
@@ -26,5 +26,7 @@
     </div>
  </div>
   <script src="client_bundle.js"></script>
+  <footer> This is a Node & Angular single page app that calculates the mean, median, and mode based off of user input.</footer>
+  <button><a href="http://bparrish.com">Brent's Page</a></button>
 </body>
 </html>
