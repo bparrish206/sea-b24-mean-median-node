@@ -7,6 +7,8 @@ module.exports = function(app) {
       $scope.mmm.mean = mmmBackend().mean(nums);
       $scope.mmm.median = mmmBackend().median(nums);
       $scope.mmm.mode = mmmBackend().mode(nums);
+
+      $scope.view = 'show';
     };
 }]);
 };
