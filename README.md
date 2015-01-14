@@ -1,3 +1,7 @@
+I added a Angular frontend to this project and deployed it using Aerobatic.  The link is here: http://mmm.aerobaticapp.com/
+
+
+
 sea-b24-mean-median-node
 ========================
 
