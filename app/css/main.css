@@ -33,7 +33,20 @@ section {
 footer {
   text-align: center;
   position: bottom;
-  padding: 20px; }
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #ae9c96;
+  color: #f9f1b5; }
+
+header {
+  background-color: #ae9c96;
+  padding: 10px;
+  color: #ffffff;
+  font-family: comic;
+  font-size: 130%; }
+
+header a:hover {
+  color: #f9f1b5; }
 
 button {
   background-color: #ae9c96;
@@ -42,3 +55,7 @@ button {
 a {
   color: #ffffff;
   text-decoration: none; }
+
+p {
+  font-family: comic;
+  text-align: center; }
