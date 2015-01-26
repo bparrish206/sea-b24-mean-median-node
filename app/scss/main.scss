@@ -48,7 +48,21 @@ section {
 footer {
   text-align: center;
   position:bottom;
-  padding: 20px
+  margin-top:100px;
+  padding: 20px;
+  background-color: $drk;
+  color: $yeller;
+}
+
+header {
+  background-color:$drk;
+  padding:10px;
+  color:$wht;
+  font-family:comic;
+  font-size: 130%;
+}
+header a:hover {
+  color:$yeller;
 }
 
 button {
@@ -59,4 +73,9 @@ button {
 a {
   color: $wht;
   text-decoration:none;
+}
+
+p {
+  font-family: comic;
+  text-align:center;
 }

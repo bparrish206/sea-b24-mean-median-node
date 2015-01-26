@@ -1,5 +1,5 @@
 {
-  "name": "sea-b24-mean-median-mode",
+  "name": "mmm",
   "version": "1.0.0",
   "description": "The base repo for sea-b24 mean, median and mode assignment",
   "main": "index.js",
@@ -47,5 +47,8 @@
     "angular": "^1.3.5",
     "body-parser": "^1.9.3",
     "express": "^4.10.4"
+  },
+  "_aerobatic": {
+    "appId": "Wk8H00Qcd"
   }
 }
